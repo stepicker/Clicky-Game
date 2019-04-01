@@ -1,0 +1,47 @@
+[
+    {
+        "id": 46,
+        "name": "Rossi",
+        "image": "../images/rossi.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Vinales",
+        "image": "./images/vinales.jpg"
+    },
+    {
+        "id": 93,
+        "name": "Marquez",
+        "image": "./images/marquez.jpg"
+    },
+    {
+        "id": 99,
+        "name": "Lorenzo",
+        "image": "./images/lorenzo.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Dovizioso",
+        "image": "./images/dovizioso.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Petrucci",
+        "image": "./images/petrucci.jpg"
+    },
+    {
+        "id": 42,
+        "name": "Rins",
+        "image": "./images/rins.jpg"
+    },
+    {
+        "id": 36,
+        "name": "Mir",
+        "image": "./images/mir.jpg"
+    },
+    {
+        "id": 35,
+        "name": "Crutchlow",
+        "image": "./images/crutchlow.jpg"
+    }
+]
