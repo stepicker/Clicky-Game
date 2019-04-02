@@ -3,6 +3,18 @@ import Header from "./components/Header";
 import Card from "./components/Card";
 import riders from "./riders.json";
 
+const styles = {
+  riders: {
+    "display": "flex",
+    "flex-wrap": "wrap",
+    "max-width": "900px",
+    "margin": "10px auto 10px auto"
+  }
+};
+
+const winningSound = new Audio('./sounds/ding.mp3');
+const losingSound = new Audio('./sounds/sad-trombone.mp3');
+
 class App extends Component {
 
   state = {
@@ -13,6 +25,7 @@ class App extends Component {
 
   youLose = () => {
     console.log("You lose!");
+    losingSound.play();
     this.setState({
       allRiders: riders.sort(() => { return 0.5 - Math.random() }),
       clickedRiderIds: [],
@@ -22,6 +35,7 @@ class App extends Component {
 
   keepClicking = (clickedId) => {
     console.log("Keep clicking!");
+    winningSound.play();
     this.setState({
       allRiders: riders.sort(() => { return 0.5 - Math.random() }),
       clickedRiderIds: this.state.clickedRiderIds.concat(clickedId),
@@ -49,8 +63,8 @@ class App extends Component {
   render() {
     return (
       <div id="main-container">
-        <Header score={this.state.score} />
-        <div id="riders">
+        <Header score={this.state.score} style={styles.header} />
+        <div id="riders" style={styles.riders}>
           {this.state.allRiders.map(rider => (
             <Card
               id={rider.id}
