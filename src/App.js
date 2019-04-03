@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from "./components/Header";
 import Card from "./components/Card";
 import riders from "./riders.json";
+import swal from 'sweetalert';
 
 const styles = {
   riders: {
@@ -12,7 +13,8 @@ const styles = {
   }
 };
 
-const winningSound = new Audio("./sounds/ding.mp3");
+const scoringSound = new Audio("./sounds/ding.mp3");
+const winningSound = new Audio("./sounds/ta-da.mp3");
 const losingSound = new Audio("./sounds/sad-trombone.mp3");
 
 class App extends Component {
@@ -23,10 +25,7 @@ class App extends Component {
     score: 0
   };
 
-  youLose = () => {
-    // Acknowledge the loss, and reset the state
-    console.log("You lose!");
-    losingSound.play();
+  resetScore = () => {
     this.setState({
       allRiders: riders.sort(() => { return 0.5 - Math.random() }),
       clickedRiderIds: [],
@@ -34,17 +33,46 @@ class App extends Component {
     });
   }
 
+  youLose = () => {
+    // Acknowledge the loss, and reset the state
+    console.log("You lose!");
+    losingSound.play();
+    this.resetScore();
+    swal({
+      title: "Nope...",
+      text: "You have already clicked that one. Try again!",
+      icon: "error",
+    });
+  }
+
+  youWin = () => {
+    // Acknowledge the win, then reset the state
+    console.log("You win!");
+    winningSound.play();
+    this.resetScore();
+    swal({
+      title: "Whoohoo!!",
+      text: "You got all nine riders! Click OK to play again.",
+      icon: "success",
+    });
+  }
+
   keepClicking = (clickedId) => {
     // Acknowledge the point gained, and update the state accordingly
     console.log("Keep clicking!");
-    winningSound.play();
+    scoringSound.play();
     const oldScore = this.state.score;
     const newScore = oldScore + 1;
-    this.setState({
-      allRiders: riders.sort(() => { return 0.5 - Math.random() }),
-      clickedRiderIds: this.state.clickedRiderIds.concat(clickedId),
-      score: newScore
-    });
+    if (newScore === 9) {
+      this.youWin();
+    }
+    else {
+      this.setState({
+        allRiders: riders.sort(() => { return 0.5 - Math.random() }),
+        clickedRiderIds: this.state.clickedRiderIds.concat(clickedId),
+        score: newScore
+      });
+    }
   }
 
   checkRiderId = clickedId => {
