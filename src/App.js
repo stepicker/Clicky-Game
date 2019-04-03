@@ -5,15 +5,15 @@ import riders from "./riders.json";
 
 const styles = {
   riders: {
-    "display": "flex",
-    "flex-wrap": "wrap",
-    "max-width": "900px",
-    "margin": "10px auto 10px auto"
+    display: "flex",
+    flexWrap: "wrap",
+    maxWidth: "900px",
+    margin: "10px auto 10px auto"
   }
 };
 
-const winningSound = new Audio('./sounds/ding.mp3');
-const losingSound = new Audio('./sounds/sad-trombone.mp3');
+const winningSound = new Audio("./sounds/ding.mp3");
+const losingSound = new Audio("./sounds/sad-trombone.mp3");
 
 class App extends Component {
 
@@ -24,6 +24,7 @@ class App extends Component {
   };
 
   youLose = () => {
+    // Acknowledge the loss, and reset the state
     console.log("You lose!");
     losingSound.play();
     this.setState({
@@ -34,12 +35,15 @@ class App extends Component {
   }
 
   keepClicking = (clickedId) => {
+    // Acknowledge the point gained, and update the state accordingly
     console.log("Keep clicking!");
     winningSound.play();
+    const oldScore = this.state.score;
+    const newScore = oldScore + 1;
     this.setState({
       allRiders: riders.sort(() => { return 0.5 - Math.random() }),
       clickedRiderIds: this.state.clickedRiderIds.concat(clickedId),
-      score: this.state.score + 1
+      score: newScore
     });
   }
 
@@ -61,9 +65,10 @@ class App extends Component {
   }
 
   render() {
+    console.log("Clicked so far: ", this.state.clickedRiderIds);
     return (
       <div id="main-container">
-        <Header score={this.state.score} style={styles.header} />
+        <Header score={this.state.score} />
         <div id="riders" style={styles.riders}>
           {this.state.allRiders.map(rider => (
             <Card
