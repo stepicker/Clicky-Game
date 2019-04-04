@@ -12,7 +12,7 @@ First assignment using React at the Penn Coding Bootcamp!
 
 ## Under the Hood
 
-Other the React and its components, the only package used by this game is Sweet Alert for modals.
+Other than React and its components, the only external package used by this game is Sweet Alert for modals.
 
 ## Ready to Try?
 
