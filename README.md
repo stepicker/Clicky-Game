@@ -1,6 +1,6 @@
 # MotoGP Clicky Game
 
-First assignment using React at the Penn Coding Bootcamp!
+First assignment using React at the Penn Coding Bootcamp
 
 ## How It Works
 
